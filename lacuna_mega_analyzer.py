@@ -14,7 +14,7 @@ from collections import Counter, defaultdict
 import networkx as nx
 import matplotlib.pyplot as plt
 from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.metrics.pairwise import cosine_similarity
+from sklearn.metrics.pairwise import cosine_similarity as sklearn_cosine_similarity
 import numpy as np
 
 # ========== КОНФИГУРАЦИЯ ==========
@@ -163,7 +163,7 @@ def analyze_connections(index):
             tfidf_matrix = vectorizer.fit_transform(all_texts)
             
             # Вычисляем косинусную близость
-            similarity_matrix = cosine_similarity(tfidf_matrix)
+            similarity_matrix = sklearn_cosine_similarity(tfidf_matrix)
             
             # Находим наиболее похожие пары
             for i in range(len(valid_file_indices)):
