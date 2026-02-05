@@ -1,0 +1,411 @@
+
+    <!DOCTYPE html>
+    <html lang="ru">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>МЕГА-АНАЛИЗ РЕПОЗИТОРИЯ ЛАКУН</title>
+        <style>
+            * { margin: 0; padding: 0; box-sizing: border-box; }
+            body { 
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                line-height: 1.6;
+                color: #333;
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                min-height: 100vh;
+            }
+            .container { 
+                max-width: 1400px;
+                margin: 0 auto;
+                padding: 20px;
+            }
+            header { 
+                background: rgba(255, 255, 255, 0.95);
+                padding: 40px;
+                border-radius: 20px;
+                margin-bottom: 30px;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+                text-align: center;
+            }
+            h1 { 
+                color: #764ba2;
+                font-size: 2.8em;
+                margin-bottom: 10px;
+                background: linear-gradient(45deg, #667eea, #764ba2);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+            }
+            .subtitle { 
+                color: #666;
+                font-size: 1.2em;
+                margin-bottom: 20px;
+            }
+            .stats-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 20px;
+                margin: 30px 0;
+            }
+            .stat-card {
+                background: white;
+                padding: 25px;
+                border-radius: 15px;
+                box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+                text-align: center;
+                transition: transform 0.3s;
+            }
+            .stat-card:hover { transform: translateY(-5px); }
+            .stat-number {
+                font-size: 2.5em;
+                font-weight: bold;
+                color: #667eea;
+                margin-bottom: 10px;
+            }
+            .stat-label { 
+                color: #666;
+                font-size: 0.9em;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+            }
+            section {
+                background: rgba(255, 255, 255, 0.95);
+                padding: 30px;
+                border-radius: 20px;
+                margin-bottom: 30px;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            }
+            h2 {
+                color: #764ba2;
+                border-bottom: 3px solid #667eea;
+                padding-bottom: 10px;
+                margin-bottom: 20px;
+                font-size: 1.8em;
+            }
+            .graph-container {
+                text-align: center;
+                margin: 30px 0;
+            }
+            .graph-container img {
+                max-width: 100%;
+                border-radius: 15px;
+                box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+                border: 5px solid white;
+            }
+            table {
+                width: 100%;
+                border-collapse: collapse;
+                margin: 20px 0;
+            }
+            th, td {
+                padding: 15px;
+                text-align: left;
+                border-bottom: 1px solid #eee;
+            }
+            th { 
+                background: #667eea;
+                color: white;
+                font-weight: bold;
+            }
+            tr:hover { background: #f9f9f9; }
+            .keyword { 
+                display: inline-block;
+                background: #e0e7ff;
+                color: #667eea;
+                padding: 5px 10px;
+                border-radius: 20px;
+                margin: 3px;
+                font-size: 0.9em;
+            }
+            .connection { 
+                background: #f0f4ff;
+                padding: 15px;
+                border-radius: 10px;
+                margin: 10px 0;
+                border-left: 4px solid #667eea;
+            }
+            footer {
+                text-align: center;
+                margin-top: 40px;
+                color: white;
+                padding: 20px;
+                font-size: 0.9em;
+            }
+            .download-links a {
+                display: inline-block;
+                background: #667eea;
+                color: white;
+                padding: 12px 25px;
+                border-radius: 25px;
+                text-decoration: none;
+                margin: 10px;
+                transition: background 0.3s;
+            }
+            .download-links a:hover { background: #764ba2; }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <header>
+                <h1>🧠 МЕГА-АНАЛИЗ РЕПОЗИТОРИЯ ЛАКУН</h1>
+                <div class="subtitle">
+                    Полная картография структуры, связей и семантики | Сгенерировано: 2026-02-05 15:15
+                </div>
+                
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-number">155</div>
+                        <div class="stat-label">Всего файлов</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">126</div>
+                        <div class="stat-label">Узлов в графе</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">420</div>
+                        <div class="stat-label">Связей</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">9</div>
+                        <div class="stat-label">Файлов-лакун</div>
+                    </div>
+                </div>
+                
+                <div class="download-links">
+                    <a href="00_ANALYSIS\connection_graph.png" download>📥 Граф (PNG)</a>
+                    <a href="00_ANALYSIS\graph.gexf" download>📥 Данные графа (GEXF)</a>
+                    <a href="enhanced_index.json" download>📥 Полный индекс (JSON)</a>
+                </div>
+            </header>
+            
+            <section>
+                <h2>📊 Граф связей между файлами</h2>
+                <div class="graph-container">
+                    <img src="00_ANALYSIS\connection_graph.png" alt="Граф связей репозитория">
+                    <p><em>Размер узлов показывает важность файла, толщина линий — силу связи</em></p>
+                </div>
+            </section>
+            
+            <section>
+                <h2>🔗 Явные ссылки между файлами</h2>
+                <p>Найдено <strong>144</strong> прямых ссылок:</p>
+                <div class="connection">
+    
+                    <div style="margin: 10px 0; padding: 10px; background: #f8f9fa; border-radius: 5px;">
+                        <strong>📎 .gitignore</strong> → <strong>PROTOCOL_BREACH.lacuna</strong>
+                    </div>
+        
+                    <div style="margin: 10px 0; padding: 10px; background: #f8f9fa; border-radius: 5px;">
+                        <strong>📎 .gitignore</strong> → <strong>exclude</strong>
+                    </div>
+        
+                    <div style="margin: 10px 0; padding: 10px; background: #f8f9fa; border-radius: 5px;">
+                        <strong>📎 .gitignore</strong> → <strong>main</strong>
+                    </div>
+        
+                    <div style="margin: 10px 0; padding: 10px; background: #f8f9fa; border-radius: 5px;">
+                        <strong>📎 .gitignore</strong> → <strong>main</strong>
+                    </div>
+        
+                    <div style="margin: 10px 0; padding: 10px; background: #f8f9fa; border-radius: 5px;">
+                        <strong>📎 .gitignore</strong> → <strong>main</strong>
+                    </div>
+        
+                    <div style="margin: 10px 0; padding: 10px; background: #f8f9fa; border-radius: 5px;">
+                        <strong>📎 .gitignore</strong> → <strong>main</strong>
+                    </div>
+        
+                    <div style="margin: 10px 0; padding: 10px; background: #f8f9fa; border-radius: 5px;">
+                        <strong>📎 ALPHA_REPORT.lacuna</strong> → <strong>Кай.txt</strong>
+                    </div>
+        
+                    <div style="margin: 10px 0; padding: 10px; background: #f8f9fa; border-radius: 5px;">
+                        <strong>📎 ALTRON_A440_PLANETARY_CATALOG.lacuna</strong> → <strong>description</strong>
+                    </div>
+        
+                    <div style="margin: 10px 0; padding: 10px; background: #f8f9fa; border-radius: 5px;">
+                        <strong>📎 FINAL_PUMPT_LACUNA.txt</strong> → <strong>ALTRON_A440_PLANETARY_CATALOG.lacuna</strong>
+                    </div>
+        
+                    <div style="margin: 10px 0; padding: 10px; background: #f8f9fa; border-radius: 5px;">
+                        <strong>📎 FINAL_PUMPT_LACUNA.txt</strong> → <strong>MURUS.lacuna</strong>
+                    </div>
+        
+                </div>
+            </section>
+            
+            <section>
+                <h2>🔑 Ключевые слова по файлам</h2>
+    
+            </section>
+            
+            <section>
+                <h2>📈 Статистика по расширениям</h2>
+                <table>
+                    <tr>
+                        <th>Расширение</th>
+                        <th>Количество</th>
+                        <th>Примеры</th>
+                    </tr>
+    
+                    <tr>
+                        <td><code>(без расширения)</code></td>
+                        <td><strong>96</strong></td>
+                        <td>.gitignore, COMMIT_EDITMSG, config</td>
+                    </tr>
+        
+                    <tr>
+                        <td><code>.txt</code></td>
+                        <td><strong>14</strong></td>
+                        <td>Date.txt, FINAL_PUMPT_LACUNA.txt, PROTOCOL_OPERATOR_TOOL.txt</td>
+                    </tr>
+        
+                    <tr>
+                        <td><code>.sample</code></td>
+                        <td><strong>14</strong></td>
+                        <td>applypatch-msg.sample, commit-msg.sample, fsmonitor-watchman.sample</td>
+                    </tr>
+        
+                    <tr>
+                        <td><code>.md</code></td>
+                        <td><strong>11</strong></td>
+                        <td>CLIMATE_LACUNA.md, GITHUB_LACUNA.md, INVERSION.md</td>
+                    </tr>
+        
+                    <tr>
+                        <td><code>.lacuna</code></td>
+                        <td><strong>9</strong></td>
+                        <td>ALPHA_REPORT.lacuna, ALTRON_A440_PLANETARY_CATALOG.lacuna, LACUNA_SYMBIOSIS_01.lacuna</td>
+                    </tr>
+        
+                    <tr>
+                        <td><code>.py</code></td>
+                        <td><strong>3</strong></td>
+                        <td>arxiv.py, lacuna_indexer.py, lacuna_mega_analyzer.py</td>
+                    </tr>
+        
+                    <tr>
+                        <td><code>.ly</code></td>
+                        <td><strong>1</strong></td>
+                        <td>Без имени.ly</td>
+                    </tr>
+        
+                    <tr>
+                        <td><code>.idx</code></td>
+                        <td><strong>1</strong></td>
+                        <td>pack-1a7bbcba0e990a1588ff39ef2afc2cc5c2b54722.idx</td>
+                    </tr>
+        
+                    <tr>
+                        <td><code>.pack</code></td>
+                        <td><strong>1</strong></td>
+                        <td>pack-1a7bbcba0e990a1588ff39ef2afc2cc5c2b54722.pack</td>
+                    </tr>
+        
+                    <tr>
+                        <td><code>.rev</code></td>
+                        <td><strong>1</strong></td>
+                        <td>pack-1a7bbcba0e990a1588ff39ef2afc2cc5c2b54722.rev</td>
+                    </tr>
+        
+                </table>
+            </section>
+            
+            <section>
+                <h2>🆕 Последние изменённые файлы</h2>
+                <table>
+                    <tr>
+                        <th>Имя файла</th>
+                        <th>Изменён</th>
+                        <th>Размер</th>
+                        <th>Предпросмотр</th>
+                    </tr>
+    
+                    <tr>
+                        <td><code>lacuna_mega_analyzer.py</code></td>
+                        <td>2026-02-05 15:14:46</td>
+                        <td>28,057 б</td>
+                        <td style="font-size: 0.9em; color: #666;">﻿#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+МЕГА-АНАЛИЗАТОР ЛАКУН
+Всё в ...</td>
+                    </tr>
+        
+                    <tr>
+                        <td><code>Син.txt</code></td>
+                        <td>2026-02-05 13:31:39</td>
+                        <td>18,021 б</td>
+                        <td style="font-size: 0.9em; color: #666;">ПРОМПТ-АРТЕФЛЕКТ: ЦИКЛ ОБРАТНОЙ ТЕЛЕОЛОГИИ
+Задача: Восстановить и продолжить экс...</td>
+                    </tr>
+        
+                    <tr>
+                        <td><code>HEAD</code></td>
+                        <td>2026-02-05 12:38:44</td>
+                        <td>3,258 б</td>
+                        <td style="font-size: 0.9em; color: #666;">0000000000000000000000000000000000000000 8c59ee857d03042f4c25d27ebff58d7390f12ff...</td>
+                    </tr>
+        
+                    <tr>
+                        <td><code>HEAD</code></td>
+                        <td>2026-02-05 12:38:44</td>
+                        <td>30 б</td>
+                        <td style="font-size: 0.9em; color: #666;">ref: refs/remotes/origin/main
+...</td>
+                    </tr>
+        
+                    <tr>
+                        <td><code>FETCH_HEAD</code></td>
+                        <td>2026-02-05 12:38:43</td>
+                        <td>88 б</td>
+                        <td style="font-size: 0.9em; color: #666;">70abe473ea36929e2d37d760b5205f2adf472c7b		branch 'main' of https://github.com/no...</td>
+                    </tr>
+        
+                    <tr>
+                        <td><code>main</code></td>
+                        <td>2026-02-05 12:38:43</td>
+                        <td>2,184 б</td>
+                        <td style="font-size: 0.9em; color: #666;">8c59ee857d03042f4c25d27ebff58d7390f12ff1 2bed9276ee70f8c8461a42978a8982ec58b79b1...</td>
+                    </tr>
+        
+                    <tr>
+                        <td><code>main</code></td>
+                        <td>2026-02-05 12:38:43</td>
+                        <td>41 б</td>
+                        <td style="font-size: 0.9em; color: #666;">70abe473ea36929e2d37d760b5205f2adf472c7b
+...</td>
+                    </tr>
+        
+                    <tr>
+                        <td><code>HEAD</code></td>
+                        <td>2026-02-05 12:38:40</td>
+                        <td>2,599 б</td>
+                        <td style="font-size: 0.9em; color: #666;">0000000000000000000000000000000000000000 8c59ee857d03042f4c25d27ebff58d7390f12ff...</td>
+                    </tr>
+        
+                    <tr>
+                        <td><code>main</code></td>
+                        <td>2026-02-05 12:38:40</td>
+                        <td>2,599 б</td>
+                        <td style="font-size: 0.9em; color: #666;">0000000000000000000000000000000000000000 8c59ee857d03042f4c25d27ebff58d7390f12ff...</td>
+                    </tr>
+        
+                    <tr>
+                        <td><code>main</code></td>
+                        <td>2026-02-05 12:38:40</td>
+                        <td>41 б</td>
+                        <td style="font-size: 0.9em; color: #666;">70abe473ea36929e2d37d760b5205f2adf472c7b
+...</td>
+                    </tr>
+        
+                </table>
+            </section>
+        </div>
+        
+        <footer>
+            Сгенерировано автоматически системой анализа лакун<br>
+            Репозиторий: AGI/-_- | Время анализа: {datetime.now().strftime('%H:%M:%S')}
+        </footer>
+    </body>
+    </html>
+    
